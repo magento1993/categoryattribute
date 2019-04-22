@@ -1,0 +1,30 @@
+<?php $subCategories = $block->getCurrentCategory()->getChildrenCategories(); ?>
+<div class="categor_list subcategory-section">
+    <ul>
+        <?php if($subCategories) { ?>
+            <?php $mediaUrl = $block->getMediaUrl(); ?>
+            <?php foreach ($subCategories as $subCategory) { ?>
+                <?php $subCategoryOb = $block->getCategoryData($subCategory->getId()); ?>
+                <li>
+                    <div class = "cate_img">
+                        <a href="<?php echo $subCategoryOb->getUrl(); ?>">
+                            <?php if($subCategoryOb->getFeaturedImage()) { ?>
+                                <?php $categoryImage = $mediaUrl.'catalog/category/'.$subCategoryOb->getFeaturedImage(); ?>
+                            <?php } else { ?>
+                                <?php $categoryImage = $mediaUrl.'catalog/category/category-placeholder.jpg'; ?>
+                            <?php } ?>
+                            <div class ="img"> 
+                                <img src="<?php echo $categoryImage; ?>" alt="<?php echo $subCategoryOb->getName(); ?>">
+                            </div >                            
+                        </a>
+                    </div>
+                    <h3 class="subcat-title">
+                    <a href="<?php echo $subCategoryOb->getUrl(); ?>" alt="<?php echo $subCategoryOb->getName(); ?>">
+                        <?php echo $subCategoryOb->getName(); ?>
+                    </a>
+                    </h3>
+                </li>
+            <?php } ?>
+        <?php }  ?>
+    </ul>
+</div>

@@ -1,0 +1,30 @@
+<?php    
+    $featuredCategories = $block->getFeaturedCategories();
+?>
+<?php if($featuredCategories->count()) { ?>
+<h3 class="title">
+    <span>Featured Categories</span>
+</h3>
+<div id="featured-slider" class="owl-carousel owl-theme">
+    <?php
+        $mediaUrl = $block->getMediaUrl();
+    ?>
+    <?php foreach ($featuredCategories as $featuredCategory) { ?>
+        <?php $featuredCategoryData = $block->getCategoryData($featuredCategory->getId()); ?>
+        <div class="home-bottom-block">
+            <div class="img-block">
+                <a href="<?php echo $featuredCategory->getUrl(); ?>">
+                    <?php if($featuredCategoryData->getFeaturedImage()) { ?>
+                        <img src="<?php echo $mediaUrl.'catalog/category/'.$featuredCategoryData->getFeaturedImage(); ?>" alt="<?php echo $featuredCategoryData->getName(); ?>" />
+                    <?php } else { ?>
+                        <img src="<?php echo $mediaUrl.'catalog/category/category-placeholder.jpg'; ?>" alt="<?php echo $featuredCategoryData->getName(); ?>" />
+                    <?php } ?>
+                </a>
+            </div>
+            <h3 class="content-block">
+                <a href="<?php echo $featuredCategory->getUrl(); ?>" ><?php echo $featuredCategory->getName(); ?></a>
+            </h3>
+        </div>
+    <?php } ?>
+</div>
+<?php }  ?>
